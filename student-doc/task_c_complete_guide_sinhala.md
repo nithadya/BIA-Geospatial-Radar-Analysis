@@ -314,6 +314,9 @@ Each placemark add කරද්දී:
 3. `Add` click කරන්න
 4. ✅ Points QGIS map එකේ correct locations වල display වෙනවා confirm කරන්න
 
+> [!IMPORTANT]
+> **Import / CRS Troubleshooting Note:** KML file එක Import කළ පසු QGIS map එකේ points නොපෙනී යන්නේ නම් හෝ වෙනත් තැනක පෙනෙන්නේ නම්, ඊට හේතුව Google Earth හි default CRS එක WGS 84 (EPSG:4326) වීමයි. එම KML Layer එක උඩ Right-click කර **`Export` → `Save Features As...`** ගොස්, **CRS එක `EPSG:5234 (Kandawala / Sri Lanka Grid)`** ලෙස තෝරා Save (Re-export) කරගන්න. එවිට points සියල්ල Aerial Image එක උඩ නිවැරදි ස්ථානවල පැහැදිලිව Display වේ!
+
 > [!TIP]
 > **Screenshot ගන්න!** — Google Earth placemark creation, KML save, QGIS import — ඔක්කොම.
 
@@ -403,17 +406,45 @@ Each placemark add කරද්දී:
    - **id**: 1, 2, 3... (sequential)
    - **name**: "Terminal Building 1", "Hangar A", etc.
    - **type**: "Terminal", "Hangar", "Office", "Residential", etc.
-   - **size**: sq meters (approximate)
+   - **size**: `0` ලෙස දමන්න (පසුව QGIS එකෙන් Auto-Calculate කරනු ලැබේ)
 6. `OK` click කරන්න
 7. Feature drawn!
 8. Continue drawing more features...
 9. Done ද? **Save Layer Edits** button click කරන්න (floppy disk icon)
 10. **Toggle Editing** off කරන්න
 
+> [!TIP]
+> **`size` ($m^2$) Auto-Calculate කරන ආකාරය:**
+> ඩ්‍රෝ කරද්දී `size` සඳහා අතින් අගයන් ගැසීමට අවශ්‍ය නැත (නිකන්ම `0` Enter කරන්න). සියලුම Features ඩ්‍රෝ කර අවසන් වූ පසු:
+> 1. Layer එක Right-click → **`Open Attribute Table`** යන්න.
+> 2. **Field Calculator** icon එක (🧮 abacus icon) Click කරන්න (Ctrl + I).
+> 3. **`Update existing field`** Check කර `size` field එක තෝරන්න.
+> 4. Expression එකට **`$area`** ලෙස Type කර **OK** Click කරන්න.
+> QGIS මඟින් සියලුම Polygons වල exact square meters ($m^2$) අගය Attribute table එකට Auto-calculate කර පුරවනු ඇත!
+
 > [!WARNING]
 > Digitize කරද්දී regularly save කරන්න! QGIS crash වුනොත් data lose වෙනවා.
 
 ### 5.4 — Buildings Digitize කරන්න (ලොකුම part එක)
+
+> [!IMPORTANT]
+> **ප්‍රමාණාත්මක සටහන සහ ක්‍රමවේද සාධාරණීකරණය (Building Scope & Academic Justification):**
+> 
+> 1. **Building Digitization Scope:** මුළු සිතියමේම ඇති සියලුම ගොඩනැගිලි (thousands of buildings) digitize කිරීමට අවශ්‍ය නැත! BIA Airport Premises සහ Katunayake Air Force Base ප්‍රදේශය වටා ඇති ප්‍රධාන ගොඩනැගිලි 20 - 40ක් පමණ (representative buildings) Trace/Digitize කිරීම ප්‍රමාණවත් වේ.
+> 
+> 2. **Digitizing & Buffer Workflow (ක්‍රමවේද 2ක තේරීම):**
+>    - **ක්‍රමය A (Clip Tool Automation - Recommended):** පළමුව Airport/Air Force base අවට ඇති ගොඩනැගිලි digitize කරන්න. Buffer සීමාවන් ගැන වදවීමට අවශ්‍ය නැත. Step 6 හිදී `Clip` Tool එක run කළ පසු, QGIS මඟින් Auto-select කර exact radar suitability zone එක ඇතුළත ඇති ගොඩනැගිලි පමණක් කපා වෙන්කර දෙනු ඇත.
+>    - **ක්‍රමය B (Visual Guide Approach):** නැතහොත්, පළමුව Step 6.1 හි `Buffer` run කර සිතියම මත suitability zone වටරවුම පෙනෙන්න තබාගෙන, එම වටරවුම ඇතුළත ඇති ගොඩනැගිලි පමණක් digitize කරන්න.
+> 
+> 3. **Marking Criteria & Academic Justification (ඇගයීම් නිර්ණායක සාධාරණීකරණය):**
+>    - Task C හි ලකුණු 30 ප්‍රදානය කෙරෙන්නේ Spatial Analysis & Geo-processing ශක්‍යතාවය වෙනුවෙනි. 
+>    - `Clip` සහ `Buffer` වැනි GIS Geoprocessing tools භාවිතයෙන් Suitability boundary එකක් ගණනය කර, ඊට අදාළ ගොඩනැගිලි වෙන්කර ගැනීම (spatial overlay analysis) මඟින් ඔබ අතින් (manually) උපකල්පනය කරනවාට වඩා විද්‍යාත්මක සහ නිවැරදි geospatial analytical process එකක් අනුගමනය කර ඇති බව මහාචාර්ය/ඇගයුම්කරුට (Assessor) තහවුරු වේ.
+
+> [!CAUTION]
+> **සාමාන්‍යයෙන් වෙන වැරැද්දක් නොකිරීමට වගබලාගන්න (Individual Polygons vs. One Giant Box):**
+> ❌ **කරන්න එපා:** මුළු Airport Area එක හෝ Apron එකම වහෙන සේ එක විශාල රතු/දුඹුරු පෙට්ටියක් (One Giant Bounding Box Polygon) එකපාර ඇඳින්න එපා! එසේ කළහොත් QGIS හි Count වන්නේ 1 Building එකක් පමණි.
+> ✅ **නිවැරදි ක්‍රමය:** Aerial Image එක ගොඩනැගිලි පැහැදිලිව පෙනෙන සේ **Zoom In** කරන්න. ඉන්පසු එක එක ගොඩනැගිල්ල (Terminal, Hangars, Offices, nearby structures) වටේට වෙන වෙනම (Individual Polygon Feature) Click කර ඇඳලා Finish කරන්න. එවිට Attribute Table එකේ Rows 20–40ක් (Building 1, Building 2...) ලෙස එක්රැස් වේ.
+> 💡 **Pro Tip (Opacity 50%):** ගොඩනැගිලි ඩ්‍රෝ කරද්දී යට තියෙන Photo එක පෙනීමට, `BIA_Buildings` Layer එක උඩ Right-click කර `Properties` → `Symbology` → `Opacity` slider එක **50%** ට අඩු කරන්න.
 
 Aerial image එක zoom in කරලා:
 1. Suitability area එක (PSR/SSR 2-3km zone, SMR zone) ඇතුලේ **සෑම building** එකම trace/draw කරන්න

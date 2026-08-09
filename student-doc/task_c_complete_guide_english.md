@@ -314,6 +314,9 @@ When adding each placemark:
 3. Click `Add`
 4. ✅ Confirm that the points are displayed at the correct locations on the QGIS map
 
+> [!IMPORTANT]
+> **Import / CRS Troubleshooting Note:** If the points are not displayed or visible on the QGIS map after importing the KML file, it is due to a CRS mismatch (KML default is EPSG:4326 - WGS 84 while project uses EPSG:5234). To fix this, right-click the imported KML layer, select **`Export` → `Save Features As...`**, set the **CRS to `EPSG:5234 (Kandawala / Sri Lanka Grid)`**, and save/re-export it. The points will then display accurately on top of your aerial image!
+
 > [!TIP]
 > **Take screenshots!** — Google Earth placemark creation, KML save, QGIS import — capture everything.
 
@@ -403,17 +406,45 @@ Create and digitize all of these layers:
    - **id**: 1, 2, 3... (sequential)
    - **name**: "Terminal Building 1", "Hangar A", etc.
    - **type**: "Terminal", "Hangar", "Office", "Residential", etc.
-   - **size**: sq meters (approximate)
+   - **size**: Enter `0` (will be auto-calculated in QGIS later)
 6. Click `OK`
 7. Feature drawn!
 8. Continue drawing more features...
 9. Done? Click the **Save Layer Edits** button (floppy disk icon)
 10. Turn off **Toggle Editing**
 
+> [!TIP]
+> **How to Auto-Calculate `size` ($m^2$):**
+> You don't need to manually calculate or guess the `size` while drawing (just enter `0`). After drawing all features:
+> 1. Right-click the layer → **`Open Attribute Table`**.
+> 2. Click the **Field Calculator** icon (🧮 abacus icon) or press `Ctrl + I`.
+> 3. Check **`Update existing field`** and select the `size` field.
+> 4. In the Expression box, type **`$area`** and click **OK**.
+> QGIS will automatically compute and populate the exact square meters ($m^2$) for every single polygon in the attribute table!
+
 > [!WARNING]
 > Save regularly while digitizing! If QGIS crashes, you'll lose unsaved data.
 
 ### 5.4 — Digitize Buildings (The Biggest Part)
+
+> [!IMPORTANT]
+> **Scope Note & Academic Justification (Building Scope & Workflow Choice):**
+> 
+> 1. **Building Digitization Scope:** You do NOT need to digitize thousands of buildings across the entire map! Digitizing around 20–40 main/representative buildings within the BIA Airport premises and SLAF Katunayake Base area is completely sufficient for the required calculations.
+> 
+> 2. **Digitizing vs. Buffer Order (Two Valid Workflows):**
+>    - **Method A (Clip Tool Automation - Recommended for speed & accuracy):** Digitize 20–40 buildings across the general Airport / Air Force base premises first. You don't need to worry about exact buffer boundaries initially. Later in Step 6, the `Clip` tool will automatically intersect and extract only the buildings that fall inside the calculated suitability buffer zone.
+>    - **Method B (Visual Guide Approach):** Alternatively, run Step 6.1 `Buffer` first to render the suitability boundary rings visually on your QGIS map canvas, then digitize the buildings directly within those rings.
+> 
+> 3. **Marking Criteria & Academic Justification:**
+>    - Task C (30 Marks) evaluates students on Spatial Analysis & Geo-processing proficiency.
+>    - Using spatial overlay operations (`Buffer` combined with `Clip`) to programmatically extract features within a designated radar suitability boundary demonstrates standard GIS modeling methodology (ICAO radar siting standards) rather than manual visual estimation, ensuring top-band assessment marks.
+
+> [!CAUTION]
+> **Critical Digitizing Rule (Individual Footprints vs. One Giant Bounding Box):**
+> ❌ **DO NOT:** Draw one single giant polygon covering the entire airport apron or sector! Doing so will result in QGIS recording only 1 single building feature instead of individual structures.
+> ✅ **DO:** **Zoom In** closely on the aerial image until individual roof structures are clearly visible. Trace each building individually (Polygon per structure: Terminal, Hangars, Offices, etc.) so that your Attribute Table contains separate rows for each building feature (e.g., 20–40 distinct building rows).
+> 💡 **Pro Tip (50% Layer Opacity):** To keep the aerial photo visible under drawn shapes, right-click `BIA_Buildings` → `Properties` → `Symbology` → set **Opacity to 50%**.
 
 Zoom in on the aerial image:
 1. Trace/draw **every building** within the suitability area (PSR/SSR 2-3km zone, SMR zone)
