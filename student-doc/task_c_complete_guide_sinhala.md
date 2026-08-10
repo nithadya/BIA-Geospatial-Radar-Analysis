@@ -428,17 +428,19 @@ Each placemark add කරද්දී:
 ### 5.4 — Buildings Digitize කරන්න (ලොකුම part එක)
 
 > [!IMPORTANT]
-> **ප්‍රමාණාත්මක සටහන සහ ක්‍රමවේද සාධාරණීකරණය (Building Scope & Academic Justification):**
+> **ප්‍රමාණාත්මක සටහන, Manual Digitizing සහ Academic Justification:**
 > 
-> 1. **Building Digitization Scope:** මුළු සිතියමේම ඇති සියලුම ගොඩනැගිලි (thousands of buildings) digitize කිරීමට අවශ්‍ය නැත! BIA Airport Premises සහ Katunayake Air Force Base ප්‍රදේශය වටා ඇති ප්‍රධාන ගොඩනැගිලි 20 - 40ක් පමණ (representative buildings) Trace/Digitize කිරීම ප්‍රමාණවත් වේ.
+> 1. **Manual Digitizing (අතින් ඩ්‍රෝ කිරීම 100%ක්ම නිවැරදියි):**
+>    - GIS හි ගොඩනැගිලි වල මායිම් (Footprints) mouse එකෙන් click කරමින් **අතින් Trace/Draw (Manual Digitizing) කිරීම අත්‍යවශ්‍ය සහ සම්පූර්ණයෙන්ම නිවැරදි පියවරකි.**
+>    - මුළු සිතියමේම ඇති සියලුම ගොඩනැගිලි (thousands of buildings) digitize කිරීමට අවශ්‍ය නැත! BIA Airport Premises සහ Katunayake Air Force Base ප්‍රදේශය වටා ඇති ප්‍රධාන ගොඩනැගිලි 20 - 40ක් පමණ (representative buildings) වෙන වෙනම Trace/Digitize කිරීම ප්‍රමාණවත් වේ.
 > 
 > 2. **Digitizing & Buffer Workflow (ක්‍රමවේද 2ක තේරීම):**
->    - **ක්‍රමය A (Clip Tool Automation - Recommended):** පළමුව Airport/Air Force base අවට ඇති ගොඩනැගිලි digitize කරන්න. Buffer සීමාවන් ගැන වදවීමට අවශ්‍ය නැත. Step 6 හිදී `Clip` Tool එක run කළ පසු, QGIS මඟින් Auto-select කර exact radar suitability zone එක ඇතුළත ඇති ගොඩනැගිලි පමණක් කපා වෙන්කර දෙනු ඇත.
->    - **ක්‍රමය B (Visual Guide Approach):** නැතහොත්, පළමුව Step 6.1 හි `Buffer` run කර සිතියම මත suitability zone වටරවුම පෙනෙන්න තබාගෙන, එම වටරවුම ඇතුළත ඇති ගොඩනැගිලි පමණක් digitize කරන්න.
+>    - **ක්‍රමය A (Clip Tool Automation - Recommended):** පළමුව Airport/Air Force base අවට ඇති ගොඩනැගිලි 20-40 අතින් digitize කරන්න. Buffer සීමාවන් ගැන වදවීමට අවශ්‍ය නැත. Step 6 හිදී `Clip` Tool එක run කළ පසු, QGIS මඟින් Auto-select කර exact radar suitability zone එක ඇතුළත ඇති ගොඩනැගිලි පමණක් කපා වෙන්කර දෙනු ඇත.
+>    - **ක්‍රමය B (Visual Guide Approach):** නැතහොත්, පළමුව Step 6.1 හි `Buffer` run කර සිතියම මත suitability zone වටරවුම පෙනෙන්න තබාගෙන, එම වටරවුම ඇතුළත ඇති ගොඩනැගිලි පමණක් අතින් digitize කරන්න.
 > 
 > 3. **Marking Criteria & Academic Justification (ඇගයීම් නිර්ණායක සාධාරණීකරණය):**
->    - Task C හි ලකුණු 30 ප්‍රදානය කෙරෙන්නේ Spatial Analysis & Geo-processing ශක්‍යතාවය වෙනුවෙනි. 
->    - `Clip` සහ `Buffer` වැනි GIS Geoprocessing tools භාවිතයෙන් Suitability boundary එකක් ගණනය කර, ඊට අදාළ ගොඩනැගිලි වෙන්කර ගැනීම (spatial overlay analysis) මඟින් ඔබ අතින් (manually) උපකල්පනය කරනවාට වඩා විද්‍යාත්මක සහ නිවැරදි geospatial analytical process එකක් අනුගමනය කර ඇති බව මහාචාර්ය/ඇගයුම්කරුට (Assessor) තහවුරු වේ.
+>    - Task C හි ලකුණු 30 ප්‍රදානය කෙරෙන්නේ Spatial Analysis & Geo-processing ශක්‍යතාවය වෙනුවෙනි.
+>    - ගොඩනැගිලි අතින් ඩ්‍රෝ කළද (Step 5), 300m / 2km සීමාවන් ඇසින් නොබලා `Clip` සහ `Buffer` වැනි QGIS Geoprocessing tools මඟින් ගණනය කර වෙන්කර ගැනීම (spatial overlay analysis) මඟින් ඔබ විද්‍යාත්මක සහ නිවැරදි geospatial analytical process එකක් අනුගමනය කර ඇති බව මහාචාර්ය/ඇගයුම්කරුට (Assessor) තහවුරු වේ.
 
 > [!CAUTION]
 > **සාමාන්‍යයෙන් වෙන වැරැද්දක් නොකිරීමට වගබලාගන්න (Individual Polygons vs. One Giant Box):**

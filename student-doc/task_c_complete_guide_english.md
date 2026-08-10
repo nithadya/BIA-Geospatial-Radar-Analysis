@@ -428,17 +428,19 @@ Create and digitize all of these layers:
 ### 5.4 — Digitize Buildings (The Biggest Part)
 
 > [!IMPORTANT]
-> **Scope Note & Academic Justification (Building Scope & Workflow Choice):**
+> **Scope Note, Manual Digitizing & Academic Justification:**
 > 
-> 1. **Building Digitization Scope:** You do NOT need to digitize thousands of buildings across the entire map! Digitizing around 20–40 main/representative buildings within the BIA Airport premises and SLAF Katunayake Base area is completely sufficient for the required calculations.
+> 1. **Manual Digitizing is 100% Mandatory & Correct:**
+>    - Manually tracing/drawing building footprints polygon-by-polygon using mouse clicks is the standard, 100% correct, and mandatory GIS procedure.
+>    - You do NOT need to digitize thousands of buildings across the entire map! Digitizing around 20–40 main/representative buildings within the BIA Airport premises and SLAF Katunayake Base area is completely sufficient for the required calculations.
 > 
 > 2. **Digitizing vs. Buffer Order (Two Valid Workflows):**
->    - **Method A (Clip Tool Automation - Recommended for speed & accuracy):** Digitize 20–40 buildings across the general Airport / Air Force base premises first. You don't need to worry about exact buffer boundaries initially. Later in Step 6, the `Clip` tool will automatically intersect and extract only the buildings that fall inside the calculated suitability buffer zone.
->    - **Method B (Visual Guide Approach):** Alternatively, run Step 6.1 `Buffer` first to render the suitability boundary rings visually on your QGIS map canvas, then digitize the buildings directly within those rings.
+>    - **Method A (Clip Tool Automation - Recommended for speed & accuracy):** Manually digitize 20–40 buildings across the general Airport / Air Force base premises first. You don't need to worry about exact buffer boundaries initially. Later in Step 6, the `Clip` tool will automatically intersect and extract only the buildings that fall inside the calculated suitability buffer zone.
+>    - **Method B (Visual Guide Approach):** Alternatively, run Step 6.1 `Buffer` first to render the suitability boundary rings visually on your QGIS map canvas, then manually digitize the buildings directly within those rings.
 > 
 > 3. **Marking Criteria & Academic Justification:**
 >    - Task C (30 Marks) evaluates students on Spatial Analysis & Geo-processing proficiency.
->    - Using spatial overlay operations (`Buffer` combined with `Clip`) to programmatically extract features within a designated radar suitability boundary demonstrates standard GIS modeling methodology (ICAO radar siting standards) rather than manual visual estimation, ensuring top-band assessment marks.
+>    - While building footprints are digitized manually in Step 5, using spatial overlay operations (`Buffer` combined with `Clip`) in Step 6 to mathematically determine suitability limits (rather than manually guessing 300m/2km distances by eye) demonstrates standard professional GIS modeling methodology (ICAO radar siting standards), ensuring top-band assessment marks.
 
 > [!CAUTION]
 > **Critical Digitizing Rule (Individual Footprints vs. One Giant Bounding Box):**
